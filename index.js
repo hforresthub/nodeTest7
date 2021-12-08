@@ -31,7 +31,7 @@ const json = ((data) => {
 		console.log('We parsed the data', jsonData);
 		return jsonData
 	} catch (err) {
-		console.log('The data couldnt be parsed');
+		console.log('The data couldnt be parsed, error: ', err);
 		return false
 	}
 })
@@ -45,3 +45,12 @@ getFile('./file.json')
 	.then(json)
 	.then(loggit)
 	.catch(err => console.error(err))
+
+new Promise((res, rej) => {
+	throw new Error('My error')
+}).catch(err => {
+	console.log("custom error: ", err);
+	throw new Error('Erception')
+}).catch(err => {
+	console.log('How deep does this go??', err);
+})
